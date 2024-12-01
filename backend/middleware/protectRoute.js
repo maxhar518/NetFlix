@@ -5,12 +5,11 @@ import { ENV_VARS } from "../config/envVars.js";
 export const protectRoute = async (req, res, next) => {
 	try {
 		const token = req.cookies["jwt-netflix"];
-
 		if (!token) {
 			return res.status(401).json({ success: false, message: "Unauthorized - No Token Provided" });
 		}
 
-		const decoded = jwt.verify(token, ENV_VARS.JWT_SECRET);
+		const decoded = jwt.verify(token, ENV_VARS?.JWT_SECRET);
 
 		if (!decoded) {
 			return res.status(401).json({ success: false, message: "Unauthorized - Invalid Token" });
@@ -26,7 +25,7 @@ export const protectRoute = async (req, res, next) => {
 
 		next();
 	} catch (error) {
-		console.log("Error in protectRoute middleware: ", error.message);
+		console.log("Error in protectRoute middleware: ", error.message,);
 		res.status(500).json({ success: false, message: "Internal Server Error" });
 	}
 };

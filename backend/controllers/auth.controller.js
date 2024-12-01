@@ -93,7 +93,7 @@ export async function login(req, res) {
 	} catch (error) {
 		console.log("Error in login controller", error.message);
 		res.status(500).json({ success: false, message: "Internal server error" });
-	}
+2	}
 }
 
 export async function logout(req, res) {
